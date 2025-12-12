@@ -19,30 +19,29 @@ This repo contains my **Stanford CS224W final project**: building a heterogeneou
   - **HAN** (simple/custom)
   - **HGT**
 
-## Repository layout (simple on purpose)
+## Repository layout 
 ```
 .
 ├── notebooks/
-│   └── cs224w_final_project.ipynb     # the full end-to-end pipeline (download → graph → train → eval)
-├── data/                               # empty by default (downloaded files go here; not committed)
-│   └── README.md
-├── outputs/                            # metrics/plots/checkpoints (not committed)
-├── assets/                             # figures for README/blog (optional)
-├── scripts/                            # optional helper scripts (empty placeholders)
+│   └── cs224w_final_project_notebook.ipynb     
+├── data/                              
+├── outputs/                            
+├── assets/                             
+├── scripts/                         
 ├── requirements.txt
 └── .gitignore
 ```
 
-## Quickstart (recommended: Colab)
-1. Open `notebooks/cs224w_final_project.ipynb` in Colab.
-2. Enable GPU: **Runtime → Change runtime type → T4/A100 GPU**.
+## Quickstart 
+1. Open `notebooks/cs224w_final_project_notebook.ipynb` in Colab.
+2. Enable GPU: Change runtime type → T4/A100 GPU
 3. Run cells top-to-bottom.
 
 ### Versions tested
 The notebook was validated on Colab with:
 - **PyTorch** `2.3.1+cu121`
 - **PyTorch Geometric** `2.6.1`
-- CUDA available ✅
+- CUDA available 
 
 ## Data
 This project uses **FDA MAUDE MDR downloadable files** (pipe-delimited text in `.zip` archives), including:
@@ -67,7 +66,7 @@ Key default hyperparameters (see notebook constants):
 - `batch_size = 256`
 
 ## Reproducibility notes
-- Downloaded FDA data is **not** committed (too large). Place it under `data/raw/` (see `data/README.md`).
+- Downloaded FDA data is **not** committed. Place it under `data/raw/` (see `data/README.md`).
 - Sentence-BERT embeddings are computed with `sentence-transformers` (model: `all-MiniLM-L6-v2`).
 - Results may vary slightly by random seed and negative sampling.
 
