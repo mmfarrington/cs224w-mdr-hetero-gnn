@@ -1,0 +1,14 @@
+# Core
+numpy
+pandas
+scikit-learn
+matplotlib
+networkx
+
+# GNNs
+torchmetrics==1.4.0.post0
+sentence-transformers
+
+# NOTE:
+# torch + torch-geometric are best installed per-platform (CUDA/CPU).
+# For Colab, see the installation cell in the notebook / README.
