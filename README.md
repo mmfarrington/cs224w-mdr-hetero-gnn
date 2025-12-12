@@ -1,8 +1,8 @@
 # Predicting FDA Medical Device Adverse Events with Heterogeneous GNNs (CS224W)
 
-This repo contains my **Stanford CS224W final project**: building a heterogeneous graph from FDA MDR (MAUDE) device + narrative data and training heterogeneous GNNs to predict **report–device links**.
+This repo contains my Stanford CS224W final project: building a heterogeneous graph from FDA MDR (MAUDE) device + narrative data and training heterogeneous GNNs to predict report–device links.
 
-**Blog post (walkthrough):** <PUT_MEDIUM_LINK_HERE>
+**Medium Blog post: https://medium.com/@mfarring/predicting-fda-medical-device-adverse-events-with-heterogeneous-graph-neural-networks-f3b4fc46a941
 
 ## What this project does
 - Builds a heterogeneous graph with node types:
