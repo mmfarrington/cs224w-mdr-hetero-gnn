@@ -1,23 +1,37 @@
-# Predicting FDA Medical Device Adverse Events with Heterogeneous GNNs (CS224W)
+# Predicting FDA Medical Device Adverse Events with Heterogeneous Graph Neural Networks
 
-This repo contains my Stanford CS224W final project: building a heterogeneous graph from FDA MDR (MAUDE) device + narrative data and training heterogeneous GNNs to predict report–device links.
+[![Medium](https://img.shields.io/badge/Medium-Blog_Post-black)](https://medium.com/@mfarring/predicting-fda-medical-device-adverse-events-with-heterogeneous-graph-neural-networks-f3b4fc46a941)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-**Medium Blog post: https://medium.com/@mfarring/predicting-fda-medical-device-adverse-events-with-heterogeneous-graph-neural-networks-f3b4fc46a941
+This repository contains the official implementation, datasets, and experimental notebooks for predicting post-market medical device adverse events using Multimodal Heterogeneous Graph Neural Networks. This work was originally developed for Stanford CS224W (Machine Learning with Graphs).
 
-## What this project does
-- Builds a heterogeneous graph with node types:
-  - **Report** (MDR_REPORT_KEY)
-  - **Device** (canonicalized composite key)
-  - **Manufacturer** (normalized name)
-  - **Event** (DEVICE_EVENT_KEY, when present)
-- Adds edge types (and explicit reverse edges) such as:
-  - report → mentions → device
-  - manufacturer → makes → device
-  - event → involves → device
-- Trains and evaluates heterogeneous GNNs for **link prediction** on *(report, mentions, device)*:
-  - **R-GCN**
-  - **HAN** (simple/custom)
-  - **HGT**
+## Abstract
+Post-market surveillance of medical devices relies heavily on the FDA's Medical Device Reporting (MDR) ecosystem, which contains noisy metadata and unstructured clinical narratives. This project reformulates adverse event detection as a multimodal link prediction task on a heterogeneous graph. By integrating structured categorical data with Freedom of Information (FOI) text embeddings via Sentence-BERT, we benchmark models to predict *report-mentions-device* associations. Our results demonstrate that Heterogeneous Graph Transformers (HGT) successfully capture the complex topology of manufacturers and device product codes, significantly outperforming traditional GCN architectures.
+
+## Graph Schema & Methodology
+We construct a directed, heterogeneous graph utilizing openFDA MAUDE data:
+
+**Nodes:**
+* **Report:** Unique MDR reports.
+* **Device:** Canonicalized composite keys.
+* **Manufacturer:** Normalized manufacturer entities.
+* **Event:** Unique device event codes.
+
+**Edges (including explicit reverse relations):**
+* `report` $\rightarrow$ `mentions` $\rightarrow$ `device`
+* `manufacturer` $\rightarrow$ `makes` $\rightarrow$ `device`
+* `event` $\rightarrow$ `involves` $\rightarrow$ `device`
+
+**Multimodal Features:** Node features combine categorical indices (brand, generic name) with 384-dimensional Sentence-BERT (`all-MiniLM-L6-v2`) embeddings of clinical narratives.
+
+## Results
+The models were evaluated on a strict chronological split (January 2024 snapshot) to prevent temporal leakage. The HGT architecture achieves the highest predictive performance:
+
+| Model | Test AUROC | Test F1-Score |
+| :--- | :--- | :--- |
+| Simple HAN | 0.299 | 0.000 |
+| R-GCN | 0.482 | 0.062 |
+| **HGT** | **0.704** | **0.811** |
 
 ## Repository layout 
 ```
